@@ -34,10 +34,17 @@ export const VISUAL_STATES = {
 
   cloudy_day: {
     name: 'Cloudy Day',
+    // Enhanced with more stops to prevent banding in grays
     gradients: [
-      { color: '#B0BEC5', opacity: 1, position: 0 },
-      { color: '#90A4AE', opacity: 1, position: 40 },
-      { color: '#78909C', opacity: 1, position: 70 },
+      { color: '#B8C5CC', opacity: 1, position: 0 },
+      { color: '#B0BEC5', opacity: 1, position: 12 },
+      { color: '#A8B6BE', opacity: 1, position: 24 },
+      { color: '#A0AEB7', opacity: 1, position: 36 },
+      { color: '#98A6B0', opacity: 1, position: 48 },
+      { color: '#909EA9', opacity: 1, position: 60 },
+      { color: '#8896A2', opacity: 1, position: 72 },
+      { color: '#808E9B', opacity: 1, position: 84 },
+      { color: '#708491', opacity: 1, position: 92 },
       { color: '#607D8B', opacity: 1, position: 100 }
     ],
     particles: {
@@ -49,7 +56,7 @@ export const VISUAL_STATES = {
       direction: 'drift'
     },
     aurora: false,
-    overlayColor: 'rgba(255, 255, 255, 0.15)',
+    overlayColor: null, // Removed to prevent banding
     animationSpeed: 0.6
   },
 
@@ -122,11 +129,19 @@ export const VISUAL_STATES = {
 
   fog_day: {
     name: 'Foggy Day',
+    // Enhanced for ultra-smooth fog gradients
     gradients: [
-      { color: '#ECEFF1', opacity: 1, position: 0 },
-      { color: '#CFD8DC', opacity: 1, position: 35 },
-      { color: '#B0BEC5', opacity: 1, position: 70 },
-      { color: '#90A4AE', opacity: 1, position: 100 }
+      { color: '#F2F5F7', opacity: 1, position: 0 },
+      { color: '#ECEFF1', opacity: 1, position: 10 },
+      { color: '#E5E9EB', opacity: 1, position: 20 },
+      { color: '#DFE3E6', opacity: 1, position: 30 },
+      { color: '#D8DDE0', opacity: 1, position: 40 },
+      { color: '#D2D7DA', opacity: 1, position: 50 },
+      { color: '#C4CCD1', opacity: 1, position: 60 },
+      { color: '#B8C1C7', opacity: 1, position: 70 },
+      { color: '#ACB6BD', opacity: 1, position: 80 },
+      { color: '#A0ABB3', opacity: 1, position: 90 },
+      { color: '#95A1AA', opacity: 1, position: 100 }
     ],
     particles: {
       type: 'fog',
@@ -137,7 +152,7 @@ export const VISUAL_STATES = {
       direction: 'drift'
     },
     aurora: false,
-    overlayColor: 'rgba(255, 255, 255, 0.25)',
+    overlayColor: null, // Removed to prevent banding
     animationSpeed: 0.3,
     blurEffect: true
   },
@@ -172,11 +187,19 @@ export const VISUAL_STATES = {
 
   cloudy_night: {
     name: 'Cloudy Night',
+    // Enhanced gradient with more stops and subtle color shifts to prevent banding
     gradients: [
-      { color: '#37474F', opacity: 1, position: 0 },
-      { color: '#455A64', opacity: 1, position: 40 },
-      { color: '#546E7A', opacity: 1, position: 70 },
-      { color: '#607D8B', opacity: 1, position: 100 }
+      { color: '#2D3A41', opacity: 1, position: 0 },     // Darker start with blue tint
+      { color: '#374650', opacity: 1, position: 15 },
+      { color: '#3F4F58', opacity: 1, position: 25 },
+      { color: '#455A64', opacity: 1, position: 35 },
+      { color: '#4D6169', opacity: 1, position: 45 },
+      { color: '#546E7A', opacity: 1, position: 55 },
+      { color: '#5C7580', opacity: 1, position: 65 },
+      { color: '#657D87', opacity: 1, position: 75 },
+      { color: '#6E858F', opacity: 1, position: 85 },
+      { color: '#778D96', opacity: 1, position: 95 },
+      { color: '#7A919A', opacity: 1, position: 100 }   // Lighter end
     ],
     particles: {
       type: 'dust',
@@ -192,7 +215,7 @@ export const VISUAL_STATES = {
       intensity: 0.15,
       speed: 0.3
     },
-    overlayColor: 'rgba(55, 71, 79, 0.3)',
+    overlayColor: null, // Removed overlay to prevent banding
     animationSpeed: 0.5
   },
 
@@ -270,11 +293,18 @@ export const VISUAL_STATES = {
 
   fog_night: {
     name: 'Foggy Night',
+    // Enhanced with more stops for smooth foggy night
     gradients: [
-      { color: '#37474F', opacity: 1, position: 0 },
-      { color: '#455A64', opacity: 1, position: 35 },
-      { color: '#546E7A', opacity: 1, position: 70 },
-      { color: '#607D8B', opacity: 1, position: 100 }
+      { color: '#2F3C43', opacity: 1, position: 0 },
+      { color: '#37474F', opacity: 1, position: 12 },
+      { color: '#3F4F57', opacity: 1, position: 24 },
+      { color: '#47575F', opacity: 1, position: 36 },
+      { color: '#4F5F67', opacity: 1, position: 48 },
+      { color: '#57676F', opacity: 1, position: 60 },
+      { color: '#5F6F77', opacity: 1, position: 72 },
+      { color: '#677781', opacity: 1, position: 84 },
+      { color: '#6F7F89', opacity: 1, position: 92 },
+      { color: '#758188', opacity: 1, position: 100 }
     ],
     particles: {
       type: 'fog',
@@ -285,7 +315,7 @@ export const VISUAL_STATES = {
       direction: 'drift'
     },
     aurora: false,
-    overlayColor: 'rgba(55, 71, 79, 0.4)',
+    overlayColor: null, // Removed to prevent banding
     animationSpeed: 0.3,
     blurEffect: true
   }
