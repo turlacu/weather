@@ -13,19 +13,18 @@ export const VISUAL_STATES = {
   // ===== DAY STATES =====
   sunny_day: {
     name: 'Sunny Day',
-    // Toned down for comfortable viewing on large displays (4K TVs)
-    // Softer, more muted warm tones - less eye strain
+    // Warm orange gradient - comfortable for 4K viewing, less harsh than bright yellow
     gradients: [
-      { color: '#E8D4A0', opacity: 1, position: 0 },    // Soft beige-yellow
-      { color: '#E0CFA0', opacity: 1, position: 11 },
-      { color: '#D9CA9E', opacity: 1, position: 22 },
-      { color: '#D1C49B', opacity: 1, position: 33 },
-      { color: '#C9BE97', opacity: 1, position: 44 },
-      { color: '#C1B893', opacity: 1, position: 55 },
-      { color: '#B9B28F', opacity: 1, position: 66 },
-      { color: '#B1AC8B', opacity: 1, position: 77 },
-      { color: '#A9A687', opacity: 1, position: 88 },
-      { color: '#A1A083', opacity: 1, position: 100 }  // Warm taupe
+      { color: '#F5C89B', opacity: 1, position: 0 },    // Soft peach
+      { color: '#F1C292', opacity: 1, position: 11 },   // Peachy
+      { color: '#EDBC88', opacity: 1, position: 22 },   // Light apricot
+      { color: '#E9B67F', opacity: 1, position: 33 },   // Apricot
+      { color: '#E5AF75', opacity: 1, position: 44 },   // Light orange
+      { color: '#E0A86B', opacity: 1, position: 55 },   // Warm orange
+      { color: '#DBA162', opacity: 1, position: 66 },   // Deeper orange
+      { color: '#D69A58', opacity: 1, position: 77 },   // Medium orange
+      { color: '#D1934E', opacity: 1, position: 88 },   // Burnt orange
+      { color: '#CC8C45', opacity: 1, position: 100 }   // Deep warm orange
     ],
     particles: {
       type: 'dust',
