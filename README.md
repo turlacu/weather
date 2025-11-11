@@ -16,10 +16,10 @@ A standalone React 18 demo app featuring a dynamic, animated weather-reactive ba
 ### Core Modules
 
 1. **WeatherManager** - Fetches live weather data and determines visual states
-2. **BackgroundRenderer** - Renders dynamic animated gradients
+2. **BackgroundRenderer** - Renders dynamic animated gradients with anti-banding
 3. **ParticleLayer** - Canvas-based particle system for weather effects
 4. **AuroraLayer** - Flowing ribbons for night mode atmospherics
-5. **TransitionController** - Smooth crossfades between states (via Framer Motion)
+5. **TransitionController** - Centralized transition system with performance awareness
 6. **DebugPanel** - Testing interface for manual weather control
 
 ### Weather States
@@ -52,10 +52,13 @@ A standalone React 18 demo app featuring a dynamic, animated weather-reactive ba
 
 - **Aurora ribbons** for night modes (flowing gradient animations)
 - **Particle systems** (rain, snow, stars, dust, fog)
-- **Lightning flashes** during storms
+- **Lightning flashes** during storms (realistic random flashes)
 - **Pulse effects** for dramatic weather
 - **Blur effects** for atmospheric fog
-- **Smooth transitions** between all weather states
+- **Smooth transitions** between all weather states (2.5s crossfades)
+- **Anti-banding technology** for ultra-smooth gradients
+- **Micro-interactions** on hover for premium feel
+- **Performance-aware animations** that adapt to device capabilities
 
 ## 🚀 Getting Started
 
@@ -115,12 +118,24 @@ npm run build
 
 ## 🛠️ Technical Stack
 
-- **React 18** - Latest React with hooks
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Smooth animations and transitions
+- **React 19.2** - Latest React with enhanced hooks (backward compatible with React 18)
+- **Vite 7.2** - Ultra-fast build tool and dev server
+- **Tailwind CSS 3.4** - Utility-first CSS framework
+- **Framer Motion 12.2** - Smooth animations and transitions
 - **Canvas API** - High-performance particle rendering
 - **OpenWeatherMap API** - Live weather data
+
+## ✨ Recent Enhancements
+
+### v2.0 Improvements (Latest)
+- ✅ **Fixed gradient animations** - Implemented anti-banding techniques for ultra-smooth gradients
+- ✅ **Lightning flash effect** - Realistic random lightning flashes during storms
+- ✅ **TransitionController module** - Extracted as standalone module with performance awareness
+- ✅ **Enhanced micro-interactions** - Premium hover effects on weather status display
+- ✅ **Improved visual depth** - Multiple animated gradient layers with soft blend modes
+- ✅ **Performance optimizations** - Adaptive animations based on device capabilities
+- ✅ **Smoother transitions** - Custom easing curves for premium feel
+- ✅ **Noise overlay** - Subtle texture to prevent color banding on high-end devices
 
 ## 📁 Project Structure
 
@@ -133,7 +148,8 @@ src/
 │   ├── DebugPanel.jsx           # Testing controls
 │   └── WeatherStatus.jsx        # Weather info display
 ├── modules/            # Core logic modules
-│   └── WeatherManager.js        # Weather fetching & state
+│   ├── WeatherManager.js        # Weather fetching & state
+│   └── TransitionController.js  # Centralized transition system
 ├── utils/              # Utility functions
 │   └── performanceDetector.js   # Device capability detection
 ├── config/             # Configuration

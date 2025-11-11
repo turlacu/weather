@@ -3,9 +3,15 @@
  * Renders the dynamic animated gradient background based on visual state
  * Uses Framer Motion for smooth transitions
  * Style C: Hybrid Modern Weather Design
+ *
+ * Anti-banding techniques used:
+ * - Subtle opacity variations
+ * - Soft blend modes
+ * - Smooth animations with proper easing
+ * - Multiple gradient stops for smooth color transitions
  */
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
@@ -14,10 +20,14 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
   useEffect(() => {
     if (!visualState) return;
 
-    // Generate gradient layers
-    const gradientLayers = generateGradientLayers(visualState);
-    setLayers(gradientLayers);
-  }, [visualState]);
+    // Generate gradient layers only for medium/high performance
+    if (performanceLevel !== 'low') {
+      const gradientLayers = generateGradientLayers(visualState, performanceLevel);
+      setLayers(gradientLayers);
+    } else {
+      setLayers([]);
+    }
+  }, [visualState, performanceLevel]);
 
   if (!visualState) {
     return (
@@ -26,92 +36,123 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
   }
 
   const gradientString = createGradientString(visualState.gradients);
-  console.log('BackgroundRenderer - gradient string:', gradientString);
 
   return (
-    <div className="bg-layer">
-      {/* Main gradient background */}
+    <div className="bg-layer" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Main gradient background - Base layer */}
       <motion.div
         className="bg-layer"
         style={{
-          background: gradientString
+          background: gradientString,
+          willChange: 'opacity'
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{
-          duration: 2,
-          ease: 'easeInOut'
+          duration: 2.5,
+          ease: [0.43, 0.13, 0.23, 0.96] // Custom easing for smoothness
         }}
       />
 
-      {/* Animated gradient layers for depth - DISABLED due to banding */}
-      {/* {layers.map((layer, index) => (
+      {/* Animated gradient layers for depth - FIXED banding with proper techniques */}
+      {layers.map((layer, index) => (
         <motion.div
-          key={`layer-${index}`}
+          key={`layer-${visualState.stateKey}-${index}`}
           className="absolute inset-0"
           style={{
             background: layer.gradient,
-            opacity: layer.opacity,
-            mixBlendMode: layer.blendMode
+            mixBlendMode: layer.blendMode,
+            willChange: 'transform, opacity',
+            pointerEvents: 'none'
           }}
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{
-            opacity: layer.opacity,
-            scale: [1.1, 1.05, 1.1],
-            rotate: [0, 0.5, 0]
+            opacity: [0, layer.opacity, layer.opacity, 0],
+            scale: [1.05, 1, 0.98, 1.02, 1.05],
+            x: ['0%', '2%', '-1%', '1%', '0%'],
+            y: ['0%', '-1%', '1%', '-0.5%', '0%']
           }}
           transition={{
             duration: layer.duration,
             repeat: Infinity,
-            repeatType: 'reverse',
             ease: 'easeInOut',
-            delay: layer.delay
+            delay: layer.delay,
+            times: [0, 0.2, 0.8, 1] // Control animation timing
           }}
         />
-      ))} */}
+      ))}
 
-      {/* Overlay for additional color tinting - DISABLED due to banding */}
-      {/* {visualState.overlayColor && (
+      {/* Subtle overlay for color depth - Uses very low opacity to avoid banding */}
+      {visualState.overlayColor && (
         <motion.div
           className="absolute inset-0"
           style={{
-            backgroundColor: visualState.overlayColor
+            backgroundColor: visualState.overlayColor,
+            mixBlendMode: 'soft-light',
+            willChange: 'opacity'
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{
-            duration: 2,
-            ease: 'easeInOut'
-          }}
-        />
-      )} */}
-
-      {/* Pulse effect for storms */}
-      {visualState.pulseEffect && (
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)'
-          }}
-          animate={{
-            opacity: [0, 0.3, 0],
-            scale: [1, 1.2, 1]
-          }}
+          exit={{ opacity: 0 }}
           transition={{
             duration: 3,
-            repeat: Infinity,
             ease: 'easeInOut'
           }}
         />
       )}
 
-      {/* Blur effect for fog */}
+      {/* Pulse effect for storms - Enhanced */}
+      {visualState.pulseEffect && (
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 70%)',
+            mixBlendMode: 'overlay',
+            willChange: 'opacity, transform'
+          }}
+          animate={{
+            opacity: [0, 0.5, 0],
+            scale: [0.95, 1.15, 0.95]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: [0.45, 0, 0.55, 1],
+            repeatDelay: 0.5
+          }}
+        />
+      )}
+
+      {/* Lightning flash for storms */}
+      {visualState.pulseEffect && performanceLevel !== 'low' && (
+        <LightningFlash />
+      )}
+
+      {/* Blur effect for fog - Enhanced */}
       {visualState.blurEffect && performanceLevel !== 'low' && (
         <motion.div
           className="absolute inset-0 backdrop-blur-sm"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.02)',
+            willChange: 'opacity'
+          }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ duration: 2 }}
+          animate={{ opacity: 0.7 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 3, ease: 'easeInOut' }}
+        />
+      )}
+
+      {/* Subtle noise overlay to prevent banding (high performance only) */}
+      {performanceLevel === 'high' && (
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
+            opacity: 0.015,
+            mixBlendMode: 'overlay',
+            pointerEvents: 'none'
+          }}
         />
       )}
     </div>
@@ -119,29 +160,65 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
 };
 
 /**
- * Generate gradient layers for depth and animation
+ * Lightning Flash Component - Random flashes for storms
  */
-function generateGradientLayers(visualState) {
+const LightningFlash = () => {
+  return (
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: 'radial-gradient(ellipse at 50% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(200, 220, 255, 0.4) 20%, transparent 50%)',
+        mixBlendMode: 'screen',
+        willChange: 'opacity'
+      }}
+      animate={{
+        opacity: [0, 0, 0, 0, 0.8, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0]
+      }}
+      transition={{
+        duration: 8,
+        repeat: Infinity,
+        ease: 'linear',
+        times: [0, 0.1, 0.12, 0.14, 0.15, 0.16, 0.18, 0.19, 0.2, 0.5, 0.7, 0.8, 0.9, 0.95, 1]
+      }}
+    />
+  );
+};
+
+/**
+ * Generate gradient layers for depth and animation
+ * Fixed anti-banding with proper techniques:
+ * - Subtle opacity for layers
+ * - Better blend modes
+ * - Smooth color variations
+ */
+function generateGradientLayers(visualState, performanceLevel) {
   const layers = [];
   const baseColors = visualState.gradients;
+  const layerCount = performanceLevel === 'high' ? 3 : 2;
 
-  // Create 2-3 additional layers for depth
-  for (let i = 0; i < 2; i++) {
-    const angle = 135 + (i * 45);
+  for (let i = 0; i < layerCount; i++) {
+    // Use different gradient angles for variety
+    const angle = 45 + (i * 60);
+
+    // Create subtle color variations to avoid harsh transitions
     const colors = baseColors.map((c, idx) => {
-      // Slightly modify colors for variation
+      // Slightly shift colors and reduce opacity significantly
       return {
         ...c,
-        opacity: c.opacity * 0.3
+        opacity: c.opacity * 0.15 * (1 - i * 0.05), // Very subtle opacity
+        position: c.position
       };
     });
 
+    // Add extra gradient stops for smoother transitions
+    const enhancedColors = enhanceGradientStops(colors);
+
     layers.push({
-      gradient: createRadialGradient(colors, angle),
-      opacity: 0.4 - (i * 0.1),
-      blendMode: 'overlay',
-      duration: 20 + (i * 10),
-      delay: i * 2
+      gradient: createSmoothGradient(enhancedColors, angle, i),
+      opacity: 0.25 - (i * 0.05), // Very subtle layers
+      blendMode: i === 0 ? 'soft-light' : 'overlay',
+      duration: 25 + (i * 15), // Slower, smoother animations
+      delay: i * 3
     });
   }
 
@@ -149,33 +226,65 @@ function generateGradientLayers(visualState) {
 }
 
 /**
+ * Enhance gradient stops to prevent banding
+ * Add intermediate stops for smoother color transitions
+ */
+function enhanceGradientStops(colors) {
+  const enhanced = [];
+
+  for (let i = 0; i < colors.length - 1; i++) {
+    enhanced.push(colors[i]);
+
+    // Add an intermediate stop between each pair
+    const current = colors[i];
+    const next = colors[i + 1];
+    const midPosition = (current.position + next.position) / 2;
+
+    enhanced.push({
+      color: current.color, // Keep same color for smooth blend
+      opacity: (current.opacity + next.opacity) / 2,
+      position: midPosition
+    });
+  }
+
+  enhanced.push(colors[colors.length - 1]);
+  return enhanced;
+}
+
+/**
  * Create CSS gradient string from gradient configuration
+ * Enhanced with smoother transitions
  */
 function createGradientString(gradients) {
-  const colorStops = gradients.map(g => {
-    const hex = g.color;
-    const opacity = g.opacity;
-    const position = g.position;
+  // Add intermediate stops for ultra-smooth gradients
+  const enhanced = enhanceGradientStops(gradients);
 
-    // Convert hex to rgba
-    const rgba = hexToRgba(hex, opacity);
-
-    return `${rgba} ${position}%`;
+  const colorStops = enhanced.map(g => {
+    const rgba = hexToRgba(g.color, g.opacity);
+    return `${rgba} ${g.position}%`;
   }).join(', ');
 
   return `linear-gradient(135deg, ${colorStops})`;
 }
 
 /**
- * Create radial gradient for overlay layers
+ * Create smooth gradient for animated layers
+ * Uses multiple techniques to prevent banding
  */
-function createRadialGradient(gradients, angle = 135) {
+function createSmoothGradient(gradients, angle, layerIndex) {
   const colorStops = gradients.map(g => {
     const rgba = hexToRgba(g.color, g.opacity);
     return `${rgba} ${g.position}%`;
   }).join(', ');
 
-  return `radial-gradient(ellipse at ${angle % 180}% ${angle % 90}%, ${colorStops})`;
+  // Alternate between radial and linear for variety
+  if (layerIndex % 2 === 0) {
+    const xPos = 30 + (layerIndex * 20);
+    const yPos = 40 + (layerIndex * 15);
+    return `radial-gradient(ellipse at ${xPos}% ${yPos}%, ${colorStops})`;
+  } else {
+    return `linear-gradient(${angle}deg, ${colorStops})`;
+  }
 }
 
 /**

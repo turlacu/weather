@@ -7,6 +7,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { WeatherManager } from './modules/WeatherManager';
+import transitionController, { getCrossfadeTransition } from './modules/TransitionController';
 import performanceDetector from './utils/performanceDetector';
 import BackgroundRenderer from './components/BackgroundRenderer';
 import ParticleLayer from './components/ParticleLayer';
@@ -77,6 +78,7 @@ function App() {
   const handlePerformanceChange = (level) => {
     setPerformanceLevel(level);
     performanceDetector.setPerformanceLevel(level);
+    transitionController.setPerformanceLevel(level);
   };
 
   return (
@@ -145,10 +147,7 @@ function App() {
               bottom: 0,
               zIndex: 0
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: 'easeInOut' }}
+            {...getCrossfadeTransition(performanceLevel)}
           >
             <BackgroundRenderer
               visualState={visualState}
@@ -171,10 +170,14 @@ function App() {
               bottom: 0,
               zIndex: 10
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{
+              duration: 3,
+              ease: [0.43, 0.13, 0.23, 0.96],
+              delay: 0.3
+            }}
           >
             <AuroraLayer
               visualState={visualState}
@@ -200,7 +203,11 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5 }}
+            transition={{
+              duration: 2,
+              ease: [0.43, 0.13, 0.23, 0.96],
+              delay: 0.5
+            }}
           >
             <ParticleLayer
               visualState={visualState}
