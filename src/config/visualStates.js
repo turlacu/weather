@@ -209,12 +209,7 @@ export const VISUAL_STATES = {
       direction: 'static',
       twinkle: true
     },
-    aurora: {
-      enabled: true,
-      colors: ['#4FC3F7', '#29B6F6', '#03A9F4', '#039BE5'],
-      intensity: 0.3,
-      speed: 0.5
-    },
+    aurora: false, // Disabled - removed aurora entirely for consistent, fast, banding-free rendering
     overlayColor: 'rgba(26, 35, 126, 0.2)',
     animationSpeed: 0.4
   },
