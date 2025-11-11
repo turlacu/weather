@@ -60,26 +60,10 @@ export const AuroraLayer = ({ visualState, performanceLevel }) => {
       ctx.fillStyle = gradient1;
       ctx.fillRect(0, 0, width, height);
 
-      // Second subtle layer (high performance only)
-      if (performanceLevel === 'high' && false) { // Disabled - single layer prevents compounding
-        const gradient2 = ctx.createRadialGradient(
-          width * (0.3 - animationProgress * 0.5),
-          height * 0.15,
-          0,
-          width * 0.35,
-          height * 0.35,
-          width * 0.5
-        );
+      // Add dithering to aurora to prevent circular banding
+      addAuroraDithering(ctx, width, height, 2);
 
-        const color2 = colors[2] || colors[0];
-        gradient2.addColorStop(0, `rgba(${color2.r}, ${color2.g}, ${color2.b}, ${auroraConfig.intensity * 0.25})`);
-        gradient2.addColorStop(0.5, `rgba(${color2.r}, ${color2.g}, ${color2.b}, ${auroraConfig.intensity * 0.1})`);
-        gradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-        ctx.fillStyle = gradient2;
-        ctx.fillRect(0, 0, width, height);
-      }
-
+      // Animation frame loop (high performance only)
       if (performanceLevel === 'high') {
         timeRef.current = time;
         animationFrameRef.current = requestAnimationFrame(drawAurora);
@@ -116,6 +100,24 @@ export const AuroraLayer = ({ visualState, performanceLevel }) => {
     />
   );
 };
+
+/**
+ * Add dithering to aurora canvas to eliminate circular banding
+ */
+function addAuroraDithering(ctx, width, height, intensity = 2) {
+  const imageData = ctx.getImageData(0, 0, width, height);
+  const data = imageData.data;
+
+  for (let i = 0; i < data.length; i += 4) {
+    // Add random noise to each color channel
+    const noise = (Math.random() - 0.5) * intensity;
+    data[i] += noise;     // Red
+    data[i + 1] += noise; // Green
+    data[i + 2] += noise; // Blue
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
 
 /**
  * Convert hex color to RGB object
