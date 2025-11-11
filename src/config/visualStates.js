@@ -13,18 +13,19 @@ export const VISUAL_STATES = {
   // ===== DAY STATES =====
   sunny_day: {
     name: 'Sunny Day',
-    // Enhanced with 10 stops for ultra-smooth golden gradient
+    // Toned down for comfortable viewing on large displays (4K TVs)
+    // Softer, more muted warm tones - less eye strain
     gradients: [
-      { color: '#FFE082', opacity: 1, position: 0 },
-      { color: '#FFDD70', opacity: 1, position: 11 },
-      { color: '#FFDA5E', opacity: 1, position: 22 },
-      { color: '#FFD54F', opacity: 1, position: 33 },
-      { color: '#FFC73D', opacity: 1, position: 44 },
-      { color: '#FFB831', opacity: 1, position: 55 },
-      { color: '#FFA726', opacity: 1, position: 66 },
-      { color: '#FF9135', opacity: 1, position: 77 },
-      { color: '#FF813C', opacity: 1, position: 88 },
-      { color: '#FF7043', opacity: 1, position: 100 }
+      { color: '#E8D4A0', opacity: 1, position: 0 },    // Soft beige-yellow
+      { color: '#E0CFA0', opacity: 1, position: 11 },
+      { color: '#D9CA9E', opacity: 1, position: 22 },
+      { color: '#D1C49B', opacity: 1, position: 33 },
+      { color: '#C9BE97', opacity: 1, position: 44 },
+      { color: '#C1B893', opacity: 1, position: 55 },
+      { color: '#B9B28F', opacity: 1, position: 66 },
+      { color: '#B1AC8B', opacity: 1, position: 77 },
+      { color: '#A9A687', opacity: 1, position: 88 },
+      { color: '#A1A083', opacity: 1, position: 100 }  // Warm taupe
     ],
     particles: {
       type: 'dust',
@@ -35,7 +36,7 @@ export const VISUAL_STATES = {
       direction: 'float'
     },
     aurora: false,
-    overlayColor: 'rgba(255, 255, 255, 0.1)',
+    overlayColor: 'rgba(0, 0, 0, 0.05)', // Slight darkening for eye comfort
     animationSpeed: 0.5
   },
 
