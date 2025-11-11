@@ -114,15 +114,17 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
         <LightningFlash />
       )}
 
-      {/* Blur effect for fog */}
+      {/* Fog atmosphere - removed backdrop-blur to prevent banding */}
       {visualState.blurEffect && performanceLevel !== 'low' && (
         <motion.div
-          className="absolute inset-0 backdrop-blur-sm"
+          className="absolute inset-0"
           style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.03)', // Very subtle white haze
+            mixBlendMode: 'screen',
             willChange: 'opacity'
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
+          animate={{ opacity: 0.5 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 3, ease: 'easeInOut' }}
         />

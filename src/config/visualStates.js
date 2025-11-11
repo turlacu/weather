@@ -145,14 +145,14 @@ export const VISUAL_STATES = {
     ],
     particles: {
       type: 'fog',
-      count: 15,
-      speed: 0.2,
-      size: { min: 40, max: 80 },
-      opacity: { min: 0.1, max: 0.25 },
+      count: 20, // Increased from 15
+      speed: 0.15, // Slower for more haze effect
+      size: { min: 60, max: 120 }, // Larger fog particles
+      opacity: { min: 0.15, max: 0.35 }, // More visible
       direction: 'drift'
     },
     aurora: false,
-    overlayColor: null, // Removed to prevent banding
+    overlayColor: null,
     animationSpeed: 0.3,
     blurEffect: true
   },
@@ -308,14 +308,14 @@ export const VISUAL_STATES = {
     ],
     particles: {
       type: 'fog',
-      count: 15,
-      speed: 0.2,
-      size: { min: 40, max: 80 },
-      opacity: { min: 0.1, max: 0.25 },
+      count: 20, // Increased from 15
+      speed: 0.15, // Slower for more haze effect
+      size: { min: 60, max: 120 }, // Larger fog particles
+      opacity: { min: 0.15, max: 0.35 }, // More visible
       direction: 'drift'
     },
     aurora: false,
-    overlayColor: null, // Removed to prevent banding
+    overlayColor: null,
     animationSpeed: 0.3,
     blurEffect: true
   }
