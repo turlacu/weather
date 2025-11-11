@@ -68,8 +68,9 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
   }, [visualState, performanceLevel]);
 
   if (!visualState) {
+    // Simple solid color fallback during initial load
     return (
-      <div className="bg-layer" style={{ background: 'linear-gradient(135deg, #60A5FA, #3B82F6)' }} />
+      <div className="bg-layer" style={{ background: '#3B82F6' }} />
     );
   }
 
@@ -85,7 +86,7 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
         }}
       />
 
-      {/* Pulse effect for storms */}
+      {/* Pulse effect for storms - CSS gradient OK here (heavily blurred, animated, low opacity) */}
       {visualState.pulseEffect && (
         <motion.div
           className="absolute inset-0"
@@ -150,6 +151,7 @@ function addDithering(ctx, width, height, intensity = 2) {
 
 /**
  * Lightning Flash Component
+ * Uses CSS gradient (acceptable here - brief flash, screen blend mode, high intensity hides any banding)
  */
 const LightningFlash = () => {
   return (
