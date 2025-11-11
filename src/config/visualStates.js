@@ -13,10 +13,17 @@ export const VISUAL_STATES = {
   // ===== DAY STATES =====
   sunny_day: {
     name: 'Sunny Day',
+    // Enhanced with 10 stops for ultra-smooth golden gradient
     gradients: [
       { color: '#FFE082', opacity: 1, position: 0 },
-      { color: '#FFD54F', opacity: 1, position: 30 },
-      { color: '#FFA726', opacity: 1, position: 60 },
+      { color: '#FFDD70', opacity: 1, position: 11 },
+      { color: '#FFDA5E', opacity: 1, position: 22 },
+      { color: '#FFD54F', opacity: 1, position: 33 },
+      { color: '#FFC73D', opacity: 1, position: 44 },
+      { color: '#FFB831', opacity: 1, position: 55 },
+      { color: '#FFA726', opacity: 1, position: 66 },
+      { color: '#FF9135', opacity: 1, position: 77 },
+      { color: '#FF813C', opacity: 1, position: 88 },
       { color: '#FF7043', opacity: 1, position: 100 }
     ],
     particles: {
@@ -62,10 +69,16 @@ export const VISUAL_STATES = {
 
   rain_day: {
     name: 'Rainy Day',
+    // Enhanced with 9 stops for smooth dark blue-gray gradient
     gradients: [
       { color: '#546E7A', opacity: 1, position: 0 },
-      { color: '#455A64', opacity: 1, position: 35 },
-      { color: '#37474F', opacity: 1, position: 70 },
+      { color: '#50696F', opacity: 1, position: 12 },
+      { color: '#4C6469', opacity: 1, position: 25 },
+      { color: '#475F64', opacity: 1, position: 37 },
+      { color: '#42595E', opacity: 1, position: 50 },
+      { color: '#3D5258', opacity: 1, position: 62 },
+      { color: '#374D53', opacity: 1, position: 75 },
+      { color: '#31444A', opacity: 1, position: 87 },
       { color: '#263238', opacity: 1, position: 100 }
     ],
     particles: {
@@ -84,10 +97,17 @@ export const VISUAL_STATES = {
 
   storm_day: {
     name: 'Stormy Day',
+    // Enhanced with 10 stops for dramatic storm gradient
     gradients: [
       { color: '#455A64', opacity: 1, position: 0 },
-      { color: '#37474F', opacity: 1, position: 30 },
-      { color: '#263238', opacity: 1, position: 60 },
+      { color: '#40545E', opacity: 1, position: 11 },
+      { color: '#3B4E58', opacity: 1, position: 22 },
+      { color: '#374852', opacity: 1, position: 33 },
+      { color: '#32424C', opacity: 1, position: 44 },
+      { color: '#2D3C46', opacity: 1, position: 55 },
+      { color: '#293640', opacity: 1, position: 66 },
+      { color: '#24303A', opacity: 1, position: 77 },
+      { color: '#202A34', opacity: 1, position: 88 },
       { color: '#1C2833', opacity: 1, position: 100 }
     ],
     particles: {
@@ -107,10 +127,17 @@ export const VISUAL_STATES = {
 
   snow_day: {
     name: 'Snowy Day',
+    // Enhanced with 10 stops for soft winter gradient
     gradients: [
       { color: '#CFD8DC', opacity: 1, position: 0 },
-      { color: '#B0BEC5', opacity: 1, position: 40 },
-      { color: '#90A4AE', opacity: 1, position: 70 },
+      { color: '#C7D2D7', opacity: 1, position: 11 },
+      { color: '#BFCCD2', opacity: 1, position: 22 },
+      { color: '#B7C6CD', opacity: 1, position: 33 },
+      { color: '#AFC0C8', opacity: 1, position: 44 },
+      { color: '#A0B2BC', opacity: 1, position: 55 },
+      { color: '#98ACB6', opacity: 1, position: 66 },
+      { color: '#8FA6B0', opacity: 1, position: 77 },
+      { color: '#87A0AA', opacity: 1, position: 88 },
       { color: '#78909C', opacity: 1, position: 100 }
     ],
     particles: {
@@ -160,10 +187,17 @@ export const VISUAL_STATES = {
   // ===== NIGHT STATES =====
   clear_night: {
     name: 'Clear Night',
+    // Enhanced with 10 stops for deep blue night sky gradient
     gradients: [
       { color: '#1A237E', opacity: 1, position: 0 },
-      { color: '#283593', opacity: 1, position: 40 },
-      { color: '#303F9F', opacity: 1, position: 70 },
+      { color: '#1E2885', opacity: 1, position: 11 },
+      { color: '#232D8B', opacity: 1, position: 22 },
+      { color: '#283593', opacity: 1, position: 33 },
+      { color: '#2C3996', opacity: 1, position: 44 },
+      { color: '#2E3C99', opacity: 1, position: 55 },
+      { color: '#303F9F', opacity: 1, position: 66 },
+      { color: '#3442A3', opacity: 1, position: 77 },
+      { color: '#3745A7', opacity: 1, position: 88 },
       { color: '#3949AB', opacity: 1, position: 100 }
     ],
     particles: {
@@ -221,10 +255,16 @@ export const VISUAL_STATES = {
 
   rain_night: {
     name: 'Rainy Night',
+    // Enhanced with 9 stops for smooth rainy night gradient
     gradients: [
       { color: '#263238', opacity: 1, position: 0 },
-      { color: '#37474F', opacity: 1, position: 35 },
-      { color: '#455A64', opacity: 1, position: 70 },
+      { color: '#2B383F', opacity: 1, position: 12 },
+      { color: '#313F46', opacity: 1, position: 25 },
+      { color: '#36454D', opacity: 1, position: 37 },
+      { color: '#3C4C54', opacity: 1, position: 50 },
+      { color: '#41525A', opacity: 1, position: 62 },
+      { color: '#47585F', opacity: 1, position: 75 },
+      { color: '#4D616A', opacity: 1, position: 87 },
       { color: '#546E7A', opacity: 1, position: 100 }
     ],
     particles: {
@@ -243,10 +283,17 @@ export const VISUAL_STATES = {
 
   storm_night: {
     name: 'Stormy Night',
+    // Enhanced with 10 stops for dramatic night storm gradient
     gradients: [
       { color: '#1C2833', opacity: 1, position: 0 },
-      { color: '#263238', opacity: 1, position: 30 },
-      { color: '#37474F', opacity: 1, position: 60 },
+      { color: '#1F2B35', opacity: 1, position: 11 },
+      { color: '#232E38', opacity: 1, position: 22 },
+      { color: '#27323C', opacity: 1, position: 33 },
+      { color: '#2B3742', opacity: 1, position: 44 },
+      { color: '#303D48', opacity: 1, position: 55 },
+      { color: '#36454D', opacity: 1, position: 66 },
+      { color: '#3C4D56', opacity: 1, position: 77 },
+      { color: '#41535D', opacity: 1, position: 88 },
       { color: '#455A64', opacity: 1, position: 100 }
     ],
     particles: {
@@ -266,10 +313,17 @@ export const VISUAL_STATES = {
 
   snow_night: {
     name: 'Snowy Night',
+    // Enhanced with 10 stops for gentle snowy night gradient
     gradients: [
       { color: '#455A64', opacity: 1, position: 0 },
-      { color: '#546E7A', opacity: 1, position: 40 },
-      { color: '#607D8B', opacity: 1, position: 70 },
+      { color: '#4A6169', opacity: 1, position: 11 },
+      { color: '#4F676F', opacity: 1, position: 22 },
+      { color: '#546E7A', opacity: 1, position: 33 },
+      { color: '#5A7480', opacity: 1, position: 44 },
+      { color: '#5F7A85', opacity: 1, position: 55 },
+      { color: '#657E88', opacity: 1, position: 66 },
+      { color: '#6B858F', opacity: 1, position: 77 },
+      { color: '#728B96', opacity: 1, position: 88 },
       { color: '#78909C', opacity: 1, position: 100 }
     ],
     particles: {
