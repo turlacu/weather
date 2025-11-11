@@ -12,24 +12,25 @@
 
 /**
  * Transition configurations for different performance levels
+ * Fast, snappy transitions for responsive feel
  */
 export const TRANSITION_CONFIG = {
   high: {
-    duration: 2.5,
-    easingCurve: [0.43, 0.13, 0.23, 0.96], // Custom bezier curve
-    staggerDelay: 0.1,
+    duration: 0.8,
+    easingCurve: [0.4, 0, 0.2, 1], // Smooth easeInOut
+    staggerDelay: 0.05,
     enableBlur: true,
     enableScale: true
   },
   medium: {
-    duration: 2.0,
+    duration: 0.6,
     easingCurve: [0.4, 0, 0.2, 1], // Standard easeInOut
-    staggerDelay: 0.15,
+    staggerDelay: 0.05,
     enableBlur: true,
     enableScale: true
   },
   low: {
-    duration: 1.5,
+    duration: 0.4,
     easingCurve: [0.25, 0.1, 0.25, 1], // Fast easeInOut
     staggerDelay: 0,
     enableBlur: false,
