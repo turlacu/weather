@@ -37,8 +37,8 @@ export const AuroraLayer = ({ visualState, performanceLevel }) => {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Very slow animation (if high performance)
-      const animationProgress = performanceLevel === 'high' ? Math.sin(time * 0.0001) * 0.02 : 0;
+      // Simple, gentle animation on high performance
+      const animationProgress = performanceLevel === 'high' ? Math.sin(time * 0.00005) * 0.01 : 0;
 
       // Parse colors from hex
       const colors = auroraConfig.colors.map(hexToRgb);
@@ -53,15 +53,15 @@ export const AuroraLayer = ({ visualState, performanceLevel }) => {
         width * 0.6
       );
 
-      gradient1.addColorStop(0, `rgba(${colors[0].r}, ${colors[0].g}, ${colors[0].b}, ${auroraConfig.intensity * 0.4})`);
-      gradient1.addColorStop(0.4, `rgba(${colors[1].r}, ${colors[1].g}, ${colors[1].b}, ${auroraConfig.intensity * 0.2})`);
+      gradient1.addColorStop(0, `rgba(${colors[0].r}, ${colors[0].g}, ${colors[0].b}, ${auroraConfig.intensity * 0.3})`);
+      gradient1.addColorStop(0.4, `rgba(${colors[1].r}, ${colors[1].g}, ${colors[1].b}, ${auroraConfig.intensity * 0.15})`);
       gradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
       ctx.fillStyle = gradient1;
       ctx.fillRect(0, 0, width, height);
 
       // Second subtle layer (high performance only)
-      if (performanceLevel === 'high') {
+      if (performanceLevel === 'high' && false) { // Disabled - single layer prevents compounding
         const gradient2 = ctx.createRadialGradient(
           width * (0.3 - animationProgress * 0.5),
           height * 0.15,
@@ -110,8 +110,8 @@ export const AuroraLayer = ({ visualState, performanceLevel }) => {
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{
         mixBlendMode: 'screen',
-        filter: performanceLevel === 'high' ? 'blur(60px)' : 'blur(40px)',
-        opacity: 0.9
+        filter: 'blur(50px)', // Consistent blur regardless of performance
+        // No global opacity - intensity controlled in canvas drawing
       }}
     />
   );

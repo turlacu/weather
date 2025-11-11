@@ -47,10 +47,12 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
       ctx.fillRect(0, 0, width, height);
 
       // Add dithering noise to prevent banding
-      // Use higher intensity for night modes (dark colors show banding more)
+      // High performance gets LESS dithering to avoid graininess
+      // The cleaner the rendering, the less dithering needed
       if (performanceLevel !== 'low') {
         const isNightMode = visualState.isNight || visualState.stateKey?.includes('night');
-        const baseIntensity = performanceLevel === 'high' ? 4 : 3;
+        // Reduced dithering - too much causes visible grain
+        const baseIntensity = performanceLevel === 'high' ? 2 : 3;
         const nightBoost = isNightMode ? 1 : 0;
         addDithering(ctx, width, height, baseIntensity + nightBoost);
       }

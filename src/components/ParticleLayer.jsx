@@ -82,7 +82,10 @@ export const ParticleLayer = ({ visualState, performanceLevel }) => {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ opacity: 0.9 }}
+      style={{
+        // No global opacity - let individual particles control their own opacity
+        // Global opacity compounds with background layers causing banding
+      }}
     />
   );
 };
