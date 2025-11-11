@@ -335,12 +335,7 @@ export const VISUAL_STATES = {
       direction: 'drift',
       sway: true
     },
-    aurora: {
-      enabled: true,
-      colors: ['#80DEEA', '#4DD0E1', '#26C6DA'],
-      intensity: 0.2,
-      speed: 0.4
-    },
+    aurora: false, // Disabled - aurora radial gradients cause circular banding and slow performance
     overlayColor: 'rgba(69, 90, 100, 0.3)',
     animationSpeed: 0.7
   },
