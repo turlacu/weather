@@ -88,23 +88,22 @@ export const BackgroundRenderer = ({ visualState, performanceLevel }) => {
         }}
       />
 
-      {/* Pulse effect for storms - CSS gradient OK here (heavily blurred, animated, low opacity) */}
+      {/* Subtle atmospheric darkening for storms - no gradient, no banding */}
       {visualState.pulseEffect && (
         <motion.div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)',
-            mixBlendMode: 'overlay',
-            willChange: 'opacity, transform'
+            backgroundColor: 'rgba(0, 0, 0, 0.1)', // Solid color, no gradient
+            mixBlendMode: 'multiply',
+            willChange: 'opacity'
           }}
           animate={{
-            opacity: [0, 0.6, 0],
-            scale: [0.95, 1.15, 0.95]
+            opacity: [0.2, 0.5, 0.2]
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: [0.45, 0, 0.55, 1],
+            ease: 'easeInOut',
             repeatDelay: 0.5
           }}
         />
