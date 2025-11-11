@@ -243,12 +243,7 @@ export const VISUAL_STATES = {
       opacity: { min: 0.1, max: 0.2 },
       direction: 'drift'
     },
-    aurora: {
-      enabled: true,
-      colors: ['#546E7A', '#607D8B', '#78909C'],
-      intensity: 0.15,
-      speed: 0.3
-    },
+    aurora: false, // Disabled - gray aurora causes circular banding with minimal visual benefit
     overlayColor: null, // Removed overlay to prevent banding
     animationSpeed: 0.5
   },
